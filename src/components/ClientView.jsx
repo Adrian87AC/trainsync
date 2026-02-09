@@ -120,7 +120,7 @@ const ClientView = ({
                                 fontSize: '14px',
                                 fontWeight: '600'
                             }}>
-                                {day.dayName}
+                                {day.day_name}
                             </span>
                         </div>
 

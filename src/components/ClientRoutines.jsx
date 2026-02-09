@@ -80,7 +80,7 @@ const ClientRoutines = ({ client, routines, getExercise, setShowRoutineBuilder }
                                     gap: '8px'
                                 }}>
                                     <Calendar size={16} />
-                                    {day.dayName}
+                                    {day.day_name}
                                 </div>
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                                     {day.exercises.map((ex, exIdx) => {

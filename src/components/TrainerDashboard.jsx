@@ -3,6 +3,7 @@ import { Dumbbell, Plus, User, Activity, TrendingUp } from 'lucide-react';
 import StatCard from './StatCard';
 import ClientList from './ClientList';
 import ClientRoutines from './ClientRoutines';
+import RoutineBuilder from './RoutineBuilder';
 
 const TrainerDashboard = ({
     user,
@@ -13,9 +14,10 @@ const TrainerDashboard = ({
     setShowRoutineBuilder,
     getClientRoutines,
     getExercise,
-    onLogout
+    onLogout,
+    onSaveRoutine
 }) => {
-    const clients = data.users.filter(u => u.role === 'client' && u.trainerId === user.id);
+    const clients = data.users.filter(u => u.role === 'client' && u.trainer_id === user.id);
 
     return (
         <div style={{ minHeight: '100vh' }}>
@@ -108,6 +110,18 @@ const TrainerDashboard = ({
                         getExercise={getExercise}
                         setShowRoutineBuilder={setShowRoutineBuilder}
                     />
+                )}
+
+                {/* Routine Builder Modal */}
+                {showRoutineBuilder && (
+                    <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: 1000 }}>
+                        <RoutineBuilder
+                            clients={data.users.filter(u => u.role === 'client')}
+                            exercises={data.exercises}
+                            onSave={onSaveRoutine}
+                            onCancel={() => setShowRoutineBuilder(false)}
+                        />
+                    </div>
                 )}
             </div>
         </div>
