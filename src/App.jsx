@@ -7,7 +7,8 @@ import Register from './components/Register';
 import AdminDashboard from './components/AdminDashboard';
 import TrainerDashboard from './components/TrainerDashboard';
 import ClientView from './components/ClientView';
-import { fetchExercises, fetchRoutines, createRoutine, updateCompletion, updateNotes } from './api/api';
+import ChangePassword from './components/ChangePassword';
+import { fetchUsers, fetchExercises, fetchRoutines, createRoutine, updateCompletion, updateNotes } from './api/api';
 
 // Protected Route Component
 const ProtectedRoute = ({ children, allowedRoles }) => {
@@ -34,11 +35,12 @@ const App = () => {
     const loadData = async () => {
         if (!user) return;
         try {
-            const [exercises, routines] = await Promise.all([
+            const [users, exercises, routines] = await Promise.all([
+                fetchUsers(),
                 fetchExercises(),
                 fetchRoutines()
             ]);
-            setData({ exercises, routines });
+            setData({ users, exercises, routines });
         } catch (error) {
             console.error("Error loading data:", error);
         } finally {
@@ -119,6 +121,11 @@ const App = () => {
             <Routes>
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
+                <Route path="/change-password" element={
+                    <ProtectedRoute>
+                        <ChangePassword />
+                    </ProtectedRoute>
+                } />
 
                 <Route path="/admin" element={
                     <ProtectedRoute allowedRoles={['admin']}>
@@ -142,13 +149,15 @@ const App = () => {
                                     onSaveRoutine={handleCreateRoutine}
                                 />
                             ) : (
-                                <ClientView
-                                    user={user}
-                                    routines={getClientRoutines(user.id)}
-                                    getExercise={getExercise}
-                                    toggleExerciseCompletion={toggleExerciseCompletion}
-                                    updateExerciseNotes={handleUpdateNotes}
-                                />
+                                user ? (
+                                    <ClientView
+                                        user={user}
+                                        routines={getClientRoutines(user.id)}
+                                        getExercise={getExercise}
+                                        toggleExerciseCompletion={toggleExerciseCompletion}
+                                        updateExerciseNotes={handleUpdateNotes}
+                                    />
+                                ) : null
                             )
                         )}
                     </ProtectedRoute>

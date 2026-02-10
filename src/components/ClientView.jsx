@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Menu, Activity, Clock, Check } from 'lucide-react';
+import { Activity, Clock } from 'lucide-react';
+import ProgressTracking from './ProgressTracking';
 import ExerciseCard from './ExerciseCard';
 
 const ClientView = ({
@@ -20,84 +21,90 @@ const ClientView = ({
 
     return (
         <div style={{ minHeight: '100vh', paddingBottom: '80px' }}>
-            <div style={{ padding: '0 20px' }}>
-                <div style={{
-                    background: 'rgba(255, 255, 255, 0.15)',
-                    backdropFilter: 'blur(10px)',
-                    borderRadius: '16px',
-                    padding: '16px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '16px',
-                    marginTop: '20px'
-                }}>
+            <div className="container">
+                <div style={{ padding: '0 20px' }}>
                     <div style={{
-                        background: 'rgba(255, 255, 255, 0.2)',
-                        borderRadius: '12px',
-                        width: '56px',
-                        height: '56px',
+                        background: 'rgba(255, 255, 255, 0.15)',
+                        backdropFilter: 'blur(10px)',
+                        borderRadius: '16px',
+                        padding: '16px',
                         display: 'flex',
                         alignItems: 'center',
-                        justifyContent: 'center'
+                        gap: '16px',
+                        marginTop: '20px'
                     }}>
-                        <Activity size={28} style={{ color: 'white' }} />
-                    </div>
-                    <div>
-                        <div style={{ color: 'white', fontSize: '28px', fontWeight: '800' }}>
-                            {completedToday}
+                        <div style={{
+                            background: 'rgba(255, 255, 255, 0.2)',
+                            borderRadius: '12px',
+                            width: '56px',
+                            height: '56px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center'
+                        }}>
+                            <Activity size={28} style={{ color: 'white' }} />
                         </div>
-                        <div style={{ color: 'rgba(255, 255, 255, 0.9)', fontSize: '13px' }}>
-                            Ejercicios completados hoy
+                        <div>
+                            <div style={{ color: 'white', fontSize: '28px', fontWeight: '800' }}>
+                                {completedToday}
+                            </div>
+                            <div style={{ color: 'rgba(255, 255, 255, 0.9)', fontSize: '13px' }}>
+                                Ejercicios completados hoy
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            {/* Content */}
-            <div style={{ padding: '24px 20px' }}>
-                <h3 style={{
-                    color: 'white',
-                    fontSize: '20px',
-                    fontWeight: '700',
-                    marginBottom: '16px'
-                }}>
-                    Tu Entrenamiento de Hoy
-                </h3>
+                {/* Content */}
+                <div style={{ padding: '24px 20px' }}>
+                    <h3 style={{
+                        color: 'white',
+                        fontSize: '20px',
+                        fontWeight: '700',
+                        marginBottom: '16px'
+                    }}>
+                        Tu Entrenamiento de Hoy
+                    </h3>
 
-                {selectedRoutine && selectedRoutine.days.map((day, dayIdx) => (
-                    <div key={dayIdx} style={{ marginBottom: '24px' }}>
-                        <div style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '8px',
-                            marginBottom: '12px'
-                        }}>
-                            <Clock size={16} style={{ color: '#00d4ff' }} />
-                            <span style={{
-                                color: '#00d4ff',
-                                fontSize: '14px',
-                                fontWeight: '600'
+                    {selectedRoutine && selectedRoutine.days.map((day, dayIdx) => (
+                        <div key={dayIdx} style={{ marginBottom: '24px' }}>
+                            <div style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '8px',
+                                marginBottom: '12px'
                             }}>
-                                {day.day_name}
-                            </span>
-                        </div>
+                                <Clock size={16} style={{ color: '#00d4ff' }} />
+                                <span style={{
+                                    color: '#00d4ff',
+                                    fontSize: '14px',
+                                    fontWeight: '600'
+                                }}>
+                                    {day.day_name}
+                                </span>
+                            </div>
 
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                            {day.exercises.map((ex, exIdx) => (
-                                <ExerciseCard
-                                    key={exIdx}
-                                    exercise={getExercise(ex.exerciseId)}
-                                    exerciseData={ex}
-                                    isEditing={editingNotes === `${dayIdx}-${exIdx}`}
-                                    onToggleComplete={() => toggleExerciseCompletion(selectedRoutine.id, dayIdx, exIdx)}
-                                    onEditNotes={() => setEditingNotes(`${dayIdx}-${exIdx}`)}
-                                    onSaveNotes={() => setEditingNotes(null)}
-                                    onUpdateNotes={(notes) => updateExerciseNotes(selectedRoutine.id, dayIdx, exIdx, notes)}
-                                />
-                            ))}
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                                {day.exercises.map((ex, exIdx) => (
+                                    <ExerciseCard
+                                        key={exIdx}
+                                        exercise={getExercise(ex.exerciseId)}
+                                        exerciseData={ex}
+                                        isEditing={editingNotes === `${dayIdx}-${exIdx}`}
+                                        onToggleComplete={() => toggleExerciseCompletion(selectedRoutine.id, dayIdx, exIdx)}
+                                        onEditNotes={() => setEditingNotes(`${dayIdx}-${exIdx}`)}
+                                        onSaveNotes={() => setEditingNotes(null)}
+                                        onUpdateNotes={(notes) => updateExerciseNotes(selectedRoutine.id, dayIdx, exIdx, notes)}
+                                    />
+                                ))}
+                            </div>
                         </div>
-                    </div>
-                ))}
+                    ))}
+
+                    <hr className="my-5 border-white border-opacity-10" />
+
+                    <ProgressTracking userId={user.id} />
+                </div>
             </div>
         </div>
     );

@@ -129,13 +129,13 @@ const RoutineBuilder = ({ clients, exercises, onSave, onCancel }) => {
                                     padding: '12px',
                                     borderRadius: '8px',
                                     border: '1px solid rgba(255, 255, 255, 0.1)',
-                                    background: 'rgba(255, 255, 255, 0.05)',
+                                    background: '#1a1f3a',
                                     color: 'white'
                                 }}
                             >
-                                <option value="">Seleccionar Cliente</option>
+                                <option value="" style={{ background: '#1a1f3a', color: 'white' }}>Seleccionar Cliente</option>
                                 {clients.map(client => (
-                                    <option key={client.id} value={client.id}>{client.name}</option>
+                                    <option key={client.id} value={client.id} style={{ background: '#1a1f3a', color: 'white' }}>{client.name}</option>
                                 ))}
                             </select>
                         </div>
@@ -190,15 +190,29 @@ const RoutineBuilder = ({ clients, exercises, onSave, onCancel }) => {
                                                 value={ex.exerciseId}
                                                 onChange={(e) => updateExercise(dayIndex, exIndex, 'exerciseId', e.target.value)}
                                                 style={{
-                                                    background: 'transparent',
+                                                    background: '#0a0e27',
                                                     border: '1px solid rgba(255, 255, 255, 0.1)',
                                                     color: 'white',
                                                     padding: '8px',
                                                     borderRadius: '4px'
                                                 }}
                                             >
-                                                {exercises.map(e => (
-                                                    <option key={e.id} value={e.id}>{e.name}</option>
+                                                {/* Group exercises by muscle group */}
+                                                {Object.entries(
+                                                    exercises.reduce((acc, curr) => {
+                                                        const group = curr.muscle_group;
+                                                        if (!acc[group]) acc[group] = [];
+                                                        acc[group].push(curr);
+                                                        return acc;
+                                                    }, {})
+                                                ).map(([group, groupExercises]) => (
+                                                    <optgroup key={group} label={group.toUpperCase()} style={{ background: '#1a1f3a', color: '#00d4ff' }}>
+                                                        {groupExercises.map(e => (
+                                                            <option key={e.id} value={e.id} style={{ background: '#0a0e27', color: 'white' }}>
+                                                                {e.name}
+                                                            </option>
+                                                        ))}
+                                                    </optgroup>
                                                 ))}
                                             </select>
                                             <input

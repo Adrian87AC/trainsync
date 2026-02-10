@@ -12,14 +12,28 @@ const ExerciseCard = ({
 }) => {
     return (
         <div
+            className="exercise-card"
             style={{
                 background: exerciseData.completed
-                    ? 'linear-gradient(135deg, rgba(0, 255, 136, 0.1) 0%, rgba(0, 212, 255, 0.05) 100%)'
-                    : 'rgba(255, 255, 255, 0.05)',
-                border: `2px solid ${exerciseData.completed ? '#00ff88' : 'rgba(255, 255, 255, 0.1)'}`,
+                    ? 'linear-gradient(135deg, rgba(0, 255, 136, 0.15) 0%, rgba(0, 212, 255, 0.1) 100%)'
+                    : 'rgba(255, 255, 255, 0.08)',
+                border: `1px solid ${exerciseData.completed ? '#00ff88' : 'rgba(255, 255, 255, 0.15)'}`,
                 borderRadius: '16px',
                 padding: '16px',
-                transition: 'all 0.3s'
+                transition: 'all 0.3s',
+                cursor: 'default'
+            }}
+            onMouseEnter={(e) => {
+                e.currentTarget.style.background = exerciseData.completed
+                    ? 'linear-gradient(135deg, rgba(0, 255, 136, 0.2) 0%, rgba(0, 212, 255, 0.15) 100%)'
+                    : 'rgba(255, 255, 255, 0.12)';
+                e.currentTarget.style.borderColor = exerciseData.completed ? '#00ff88' : 'rgba(255, 255, 255, 0.3)';
+            }}
+            onMouseLeave={(e) => {
+                e.currentTarget.style.background = exerciseData.completed
+                    ? 'linear-gradient(135deg, rgba(0, 255, 136, 0.15) 0%, rgba(0, 212, 255, 0.1) 100%)'
+                    : 'rgba(255, 255, 255, 0.08)';
+                e.currentTarget.style.borderColor = exerciseData.completed ? '#00ff88' : 'rgba(255, 255, 255, 0.15)';
             }}
         >
             <div style={{

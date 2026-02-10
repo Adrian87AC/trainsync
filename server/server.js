@@ -64,6 +64,34 @@ app.post('/api/auth/login', async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 });
+// Change password
+app.put('/api/auth/change-password', authenticateToken, async (req, res) => {
+    const { oldPassword, newPassword } = req.body;
+    try {
+        const [users] = await db.query('SELECT password FROM users WHERE id = ?', [req.user.id]);
+        if (users.length === 0) return res.status(404).json({ error: 'Usuario no encontrado' });
+
+        const validPassword = await bcrypt.compare(oldPassword, users[0].password);
+        if (!validPassword) return res.status(400).json({ error: 'La contraseña actual es incorrecta' });
+
+        const hashedNewPassword = await bcrypt.hash(newPassword, 10);
+        await db.query('UPDATE users SET password = ? WHERE id = ?', [hashedNewPassword, req.user.id]);
+
+        res.json({ success: true, message: 'Contraseña actualizada correctamente' });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+// Delete account (for the user themselves)
+app.delete('/api/auth/delete-account', authenticateToken, async (req, res) => {
+    try {
+        await db.query('DELETE FROM users WHERE id = ?', [req.user.id]);
+        res.json({ success: true, message: 'Cuenta eliminada correctamente' });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
 
 // --- ADMIN ENDPOINTS ---
 
@@ -232,7 +260,33 @@ app.put('/api/notes/:id', async (req, res) => {
     }
 });
 
-const PORT = process.env.PORT || 3000;
+// --- MEASUREMENTS ENDPOINTS ---
+
+// Get measurements for a user
+app.get('/api/measurements/:userId', authenticateToken, async (req, res) => {
+    try {
+        const [rows] = await db.query('SELECT * FROM measurements WHERE user_id = ? ORDER BY date DESC', [req.params.userId]);
+        res.json(rows);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+// Add new measurement
+app.post('/api/measurements', authenticateToken, async (req, res) => {
+    const { user_id, weight, height, body_fat, chest, waist, hips, date } = req.body;
+    try {
+        await db.query(
+            'INSERT INTO measurements (user_id, weight, height, body_fat, chest, waist, hips, date) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+            [user_id, weight, height, body_fat, chest, waist, hips, date || new Date().toISOString().split('T')[0]]
+        );
+        res.json({ success: true });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });

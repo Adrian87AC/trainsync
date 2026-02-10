@@ -53,5 +53,19 @@ CREATE TABLE IF NOT EXISTS exercise_details (
     FOREIGN KEY (exercise_id) REFERENCES exercises(id) ON DELETE CASCADE
 );
 
+CREATE TABLE IF NOT EXISTS measurements (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    weight FLOAT,
+    height FLOAT,
+    body_fat FLOAT,
+    chest FLOAT,
+    waist FLOAT,
+    hips FLOAT,
+    date DATE DEFAULT (CURRENT_DATE),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
 -- Seed Data (moved to init-db.js)
 
