@@ -14,57 +14,12 @@ const TrainerDashboard = ({
     setShowRoutineBuilder,
     getClientRoutines,
     getExercise,
-    onLogout,
     onSaveRoutine
 }) => {
     const clients = data.users.filter(u => u.role === 'client' && u.trainer_id === user.id);
 
     return (
         <div style={{ minHeight: '100vh' }}>
-            {/* Header */}
-            <div style={{
-                background: 'rgba(0, 0, 0, 0.3)',
-                backdropFilter: 'blur(10px)',
-                borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-                padding: '20px 32px',
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center'
-            }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-                    <Dumbbell size={28} style={{ color: '#00d4ff' }} />
-                    <h2 style={{
-                        color: 'white',
-                        fontSize: '24px',
-                        fontWeight: '700',
-                        margin: 0
-                    }}>TrainSync Coach</h2>
-                </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-                    <div style={{ textAlign: 'right' }}>
-                        <div style={{ color: 'white', fontSize: '14px', fontWeight: '600' }}>{user.name}</div>
-                        <div style={{ color: 'rgba(255, 255, 255, 0.5)', fontSize: '12px' }}>Entrenador Pro</div>
-                    </div>
-                    <button
-                        onClick={onLogout}
-                        style={{
-                            background: 'rgba(255, 255, 255, 0.1)',
-                            border: '1px solid rgba(255, 255, 255, 0.2)',
-                            borderRadius: '8px',
-                            padding: '8px 16px',
-                            color: 'white',
-                            fontSize: '13px',
-                            cursor: 'pointer',
-                            transition: 'all 0.2s'
-                        }}
-                        onMouseEnter={(e) => e.target.style.background = 'rgba(255, 255, 255, 0.15)'}
-                        onMouseLeave={(e) => e.target.style.background = 'rgba(255, 255, 255, 0.1)'}
-                    >
-                        Salir
-                    </button>
-                </div>
-            </div>
-
             {/* Main Content */}
             <div style={{ padding: '32px', maxWidth: '1400px', margin: '0 auto' }}>
                 {/* Stats Cards */}

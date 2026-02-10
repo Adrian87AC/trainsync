@@ -7,8 +7,7 @@ const ClientView = ({
     routines,
     getExercise,
     toggleExerciseCompletion,
-    updateExerciseNotes,
-    onLogout
+    updateExerciseNotes
 }) => {
     const [selectedRoutine] = useState(routines[0] || null);
     const [editingNotes, setEditingNotes] = useState(null);
@@ -21,49 +20,7 @@ const ClientView = ({
 
     return (
         <div style={{ minHeight: '100vh', paddingBottom: '80px' }}>
-            {/* Mobile Header */}
-            <div style={{
-                background: 'linear-gradient(135deg, #7b2ff7 0%, #b24bf3 100%)',
-                padding: '24px 20px 32px',
-                borderRadius: '0 0 24px 24px',
-                boxShadow: '0 4px 20px rgba(123, 47, 247, 0.3)'
-            }}>
-                <div style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    marginBottom: '20px'
-                }}>
-                    <div>
-                        <div style={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: '13px' }}>
-                            Hola,
-                        </div>
-                        <div style={{
-                            color: 'white',
-                            fontSize: '24px',
-                            fontWeight: '700'
-                        }}>
-                            {user.name.split(' ')[0]} 💪
-                        </div>
-                    </div>
-                    <button
-                        onClick={onLogout}
-                        style={{
-                            background: 'rgba(255, 255, 255, 0.2)',
-                            border: 'none',
-                            borderRadius: '12px',
-                            width: '40px',
-                            height: '40px',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            cursor: 'pointer'
-                        }}
-                    >
-                        <Menu size={20} style={{ color: 'white' }} />
-                    </button>
-                </div>
-
+            <div style={{ padding: '0 20px' }}>
                 <div style={{
                     background: 'rgba(255, 255, 255, 0.15)',
                     backdropFilter: 'blur(10px)',
@@ -71,7 +28,8 @@ const ClientView = ({
                     padding: '16px',
                     display: 'flex',
                     alignItems: 'center',
-                    gap: '16px'
+                    gap: '16px',
+                    marginTop: '20px'
                 }}>
                     <div style={{
                         background: 'rgba(255, 255, 255, 0.2)',

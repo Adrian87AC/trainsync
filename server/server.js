@@ -1,5 +1,7 @@
 const express = require('express');
 const cors = require('cors');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const db = require('./db');
 require('dotenv').config();
 
@@ -7,10 +9,109 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+const JWT_SECRET = process.env.JWT_SECRET || 'fallback_secret';
+
+// Auth Middleware
+const authenticateToken = (req, res, next) => {
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
+    if (!token) return res.sendStatus(401);
+
+    jwt.verify(token, JWT_SECRET, (err, user) => {
+        if (err) return res.sendStatus(403);
+        req.user = user;
+        next();
+    });
+};
+
+const isAdmin = (req, res, next) => {
+    if (req.user.role !== 'admin') return res.status(403).json({ error: 'Admin access required' });
+    next();
+};
+
+// --- AUTH ENDPOINTS ---
+
+app.post('/api/auth/register', async (req, res) => {
+    const { name, email, password, role, trainer_id } = req.body;
+    try {
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const [result] = await db.query(
+            'INSERT INTO users (name, email, password, role, trainer_id) VALUES (?, ?, ?, ?, ?)',
+            [name, email, hashedPassword, role || 'client', trainer_id || null]
+        );
+        res.json({ success: true, id: result.insertId });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+app.post('/api/auth/login', async (req, res) => {
+    const { email, password } = req.body;
+    try {
+        const [users] = await db.query('SELECT * FROM users WHERE email = ?', [email]);
+        if (users.length === 0) return res.status(400).json({ error: 'User not found' });
+
+        const user = users[0];
+        const validPassword = await bcrypt.compare(password, user.password);
+        if (!validPassword) return res.status(400).json({ error: 'Invalid password' });
+
+        const token = jwt.sign({ id: user.id, email: user.email, role: user.role, name: user.name }, JWT_SECRET, { expiresIn: '1d' });
+        res.json({
+            token,
+            user: { id: user.id, name: user.name, email: user.email, role: user.role }
+        });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+// --- ADMIN ENDPOINTS ---
+
+// Get all users (for admin)
+app.get('/api/admin/users', authenticateToken, isAdmin, async (req, res) => {
+    try {
+        const [rows] = await db.query(`
+            SELECT u.id, u.name, u.email, u.role, u.trainer_id, u2.name as trainer_name 
+            FROM users u 
+            LEFT JOIN users u2 ON u.trainer_id = u2.id
+        `);
+        res.json(rows);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+// Update user (admin)
+app.put('/api/admin/users/:id', authenticateToken, isAdmin, async (req, res) => {
+    const { id } = req.params;
+    const { name, email, role, trainer_id } = req.body;
+    try {
+        await db.query(
+            'UPDATE users SET name = ?, email = ?, role = ?, trainer_id = ? WHERE id = ?',
+            [name, email, role, trainer_id || null, id]
+        );
+        res.json({ success: true });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+// Delete user (admin)
+app.delete('/api/admin/users/:id', authenticateToken, isAdmin, async (req, res) => {
+    const { id } = req.params;
+    try {
+        await db.query('DELETE FROM users WHERE id = ?', [id]);
+        res.json({ success: true });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+
 // Users
 app.get('/api/users', async (req, res) => {
     try {
-        const [rows] = await db.query('SELECT * FROM users');
+        const [rows] = await db.query('SELECT id, name, email, role, trainer_id FROM users');
         res.json(rows);
     } catch (err) {
         res.status(500).json({ error: err.message });
