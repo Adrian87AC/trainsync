@@ -69,13 +69,17 @@ const Navbar = () => {
                                 <User size={20} />
                             </button>
                             <ul className="dropdown-menu dropdown-menu-end shadow border-0 rounded-3 mt-2" style={{ background: 'rgba(255, 255, 255, 0.95)', backdropFilter: 'blur(10px)' }}>
-                                <li className="dropdown-header text-uppercase small fw-bold opacity-50">Configuración</li>
-                                <li>
-                                    <Link className="dropdown-item d-flex align-items-center py-2" to="/change-password">
-                                        <Lock size={16} className="me-2" /> Cambiar Contraseña
-                                    </Link>
-                                </li>
-                                <li><hr className="dropdown-divider opacity-10" /></li>
+                                {user.role !== 'admin' && (
+                                    <>
+                                        <li className="dropdown-header text-uppercase small fw-bold opacity-50">Configuración</li>
+                                        <li>
+                                            <Link className="dropdown-item d-flex align-items-center py-2" to="/change-password">
+                                                <Lock size={16} className="me-2" /> Cambiar Contraseña
+                                            </Link>
+                                        </li>
+                                        <li><hr className="dropdown-divider opacity-10" /></li>
+                                    </>
+                                )}
                                 <li>
                                     <button className="dropdown-item d-flex align-items-center text-danger py-2" onClick={handleLogout}>
                                         <LogOut size={16} className="me-2" /> Cerrar Sesión

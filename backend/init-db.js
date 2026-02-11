@@ -30,11 +30,11 @@ async function initDB() {
 
         // Seed Users with hashed passwords
         const users = [
-            { id: 1, name: 'Admin', email: 'admin@trainsync.com', password: 'admin123', role: 'admin', trainer_id: null },
-            { id: 2, name: 'Coach Carlos', email: 'carlos@trainsync.com', password: 'coach123', role: 'trainer', trainer_id: null },
-            { id: 3, name: 'María López', email: 'maria@example.com', password: 'client123', role: 'client', trainer_id: 2 },
-            { id: 4, name: 'Juan Pérez', email: 'juan@example.com', password: 'client123', role: 'client', trainer_id: 2 },
-            { id: 5, name: 'Coach Roberto', email: 'roberto@trainsync.com', password: 'coach123', role: 'trainer', trainer_id: null }
+            { id: 1, name: 'Admin', email: 'admin@trainsync.com', password: 'Admin_Secure_TS_2026!', role: 'admin', trainer_id: null },
+            { id: 2, name: 'Coach Carlos', email: 'carlos@trainsync.com', password: 'Coach_Secure_TS_2026!', role: 'trainer', trainer_id: null },
+            { id: 3, name: 'María López', email: 'maria@example.com', password: 'Client_Secure_TS_2026!', role: 'client', trainer_id: 2 },
+            { id: 4, name: 'Juan Pérez', email: 'juan@example.com', password: 'Client_Secure_TS_2026!', role: 'client', trainer_id: 2 },
+            { id: 5, name: 'Coach Roberto', email: 'roberto@trainsync.com', password: 'Coach_Secure_TS_2026!', role: 'trainer', trainer_id: null }
         ];
 
         for (const user of users) {
@@ -104,25 +104,25 @@ async function initDB() {
             [48, 'Sentadilla Goblet con Mancuerna', 'Piernas', 'https://youtube.com/watch?v=MeIiGibT69I'],
 
             // BÍCEPS (Mancuernas y Poleas)
-            [49, 'Curl de Bíceps con Barra Z', 'Brazos', 'https://youtube.com/watch?v=kwG2ipFRgfo'],
-            [50, 'Curl con Mancuernas (Alterno)', 'Brazos', 'https://youtube.com/watch?v=zC3nLlEvin4'],
-            [51, 'Curl Martillo con Mancuernas', 'Brazos', 'https://youtube.com/watch?v=TwD-YGVP4Bk'],
-            [52, 'Curl de Bíceps en Polea Baja', 'Brazos', 'https://youtube.com/watch?v=AsAd-uoy88Y'],
-            [53, 'Curl Predicador con Barra Z', 'Brazos', 'https://youtube.com/watch?v=fIWP-fNqdGs'],
-            [54, 'Curl Concentrado con Mancuerna', 'Brazos', 'https://youtube.com/watch?v=JvjKuAnM_m4'],
-            [55, 'Curl de Bíceps inclinado (Mancuerna)', 'Brazos', 'https://youtube.com/watch?v=soxrZlIlGuA'],
-            [56, 'Curl en Polea Alta (Doble brazo)', 'Brazos', 'https://youtube.com/watch?v=AsAd-uoy88Y'],
-            [57, 'Curl tipo Spider', 'Brazos', 'https://youtube.com/watch?v=AsAd-uoy88Y'],
+            [49, 'Curl de Bíceps con Barra Z', 'Bíceps', 'https://youtube.com/watch?v=kwG2ipFRgfo'],
+            [50, 'Curl con Mancuernas (Alterno)', 'Bíceps', 'https://youtube.com/watch?v=zC3nLlEvin4'],
+            [51, 'Curl Martillo con Mancuernas', 'Bíceps', 'https://youtube.com/watch?v=TwD-YGVP4Bk'],
+            [52, 'Curl de Bíceps en Polea Baja', 'Bíceps', 'https://youtube.com/watch?v=AsAd-uoy88Y'],
+            [53, 'Curl Predicador con Barra Z', 'Bíceps', 'https://youtube.com/watch?v=fIWP-fNqdGs'],
+            [54, 'Curl Concentrado con Mancuerna', 'Bíceps', 'https://youtube.com/watch?v=JvjKuAnM_m4'],
+            [55, 'Curl de Bíceps inclinado (Mancuerna)', 'Bíceps', 'https://youtube.com/watch?v=soxrZlIlGuA'],
+            [56, 'Curl en Polea Alta (Doble brazo)', 'Bíceps', 'https://youtube.com/watch?v=AsAd-uoy88Y'],
+            [57, 'Curl tipo Spider', 'Bíceps', 'https://youtube.com/watch?v=AsAd-uoy88Y'],
 
             // TRÍCEPS (Poleas y Pesos libres)
-            [58, 'Press Francés con Barra Z', 'Brazos', 'https://youtube.com/watch?v=d_KZx7pknBw'],
-            [59, 'Tríceps en Polea con Cuerda', 'Brazos', 'https://youtube.com/watch?v=2-LAMcpzHLU'],
-            [60, 'Tríceps en Polea con Barra Recta', 'Brazos', 'https://youtube.com/watch?v=2-LAMcpzHLU'],
-            [61, 'Extensiones sobre la cabeza (Mancuerna)', 'Brazos', 'https://youtube.com/watch?v=2-LAMcpzHLU'],
-            [62, 'Extensiones sobre la cabeza (Polea)', 'Brazos', 'https://youtube.com/watch?v=2-LAMcpzHLU'],
-            [63, 'Patada de Tríceps con Mancuerna', 'Brazos', 'https://youtube.com/watch?v=6SS6K3lAwZ8'],
-            [64, 'Dips entre bancos', 'Brazos', 'https://youtube.com/watch?v=2z8JmcrW-As'],
-            [65, 'Press de Banca Agarre Cerrado', 'Brazos', 'https://youtube.com/watch?v=nEF0bv2FW94'],
+            [58, 'Press Francés con Barra Z', 'Tríceps', 'https://youtube.com/watch?v=d_KZx7pknBw'],
+            [59, 'Tríceps en Polea con Cuerda', 'Tríceps', 'https://youtube.com/watch?v=2-LAMcpzHLU'],
+            [60, 'Tríceps en Polea con Barra Recta', 'Tríceps', 'https://youtube.com/watch?v=2-LAMcpzHLU'],
+            [61, 'Extensiones sobre la cabeza (Mancuerna)', 'Tríceps', 'https://youtube.com/watch?v=2-LAMcpzHLU'],
+            [62, 'Extensiones sobre la cabeza (Polea)', 'Tríceps', 'https://youtube.com/watch?v=2-LAMcpzHLU'],
+            [63, 'Patada de Tríceps con Mancuerna', 'Tríceps', 'https://youtube.com/watch?v=6SS6K3lAwZ8'],
+            [64, 'Dips entre bancos', 'Tríceps', 'https://youtube.com/watch?v=2z8JmcrW-As'],
+            [65, 'Press de Banca Agarre Cerrado', 'Tríceps', 'https://youtube.com/watch?v=nEF0bv2FW94'],
 
             // ANTEBRAZO
             [66, 'Curl de muñeca (Palmas arriba)', 'Antebrazo', 'https://youtube.com/watch?v=L2G6CshRAsM'],
