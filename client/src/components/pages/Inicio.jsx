@@ -1,12 +1,12 @@
 import React from 'react';
 import { Dumbbell, Plus, User, Activity, TrendingUp } from 'lucide-react';
-import StatCard from './StatCard';
+import StatCard from './Estadisticas';
 import ClientList from './ClientList';
 import ClientRoutines from './ClientRoutines';
 import RoutineBuilder from './RoutineBuilder';
 import { useTrainerViewModel } from '../../viewmodels/useTrainerViewModel';
 
-const TrainerDashboard = ({
+const Inicio = ({
     user,
     data,
     getClientRoutines,
@@ -15,7 +15,7 @@ const TrainerDashboard = ({
     onSaveRoutine
 }) => {
     // ViewModel - Manages trainer-specific state and logic
-    const viewModel = useTrainerViewModel(data, user, onSaveRoutine);
+    const entrenadorViewModel = useTrainerViewModel(data, user, onSaveRoutine);
 
     return (
         <div style={{ minHeight: '100vh' }}>

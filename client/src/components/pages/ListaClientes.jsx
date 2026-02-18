@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ClientList = ({ clients, selectedClient, setSelectedClient, getClientRoutines }) => {
+const ListaClientes = ({ clients, selectedClient, setSelectedClient, getClientRoutines }) => {
     return (
         <div style={{
             background: 'rgba(255, 255, 255, 0.05)',

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Plus, Calendar, Check } from 'lucide-react';
 
-const ClientRoutines = ({ client, routines, getExercise, setShowRoutineBuilder }) => {
+const ClientesRutinas = ({ client, routines, getExercise, setShowRoutineBuilder }) => {
     return (
         <div style={{
             background: 'rgba(255, 255, 255, 0.05)',

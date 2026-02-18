@@ -1,22 +1,22 @@
 import React from 'react';
 import { Check } from 'lucide-react';
 
-const ExerciseCard = ({
-    exercise,
-    exerciseData,
-    isEditing,
+const CartaEjercicio = ({
+    ejercicio,
+    datosEjercicio,
+    estaEditando,
     onToggleComplete,
-    onEditNotes,
-    onSaveNotes,
-    onUpdateNotes
+    enEditarNotas,
+    enGuardarNotas,
+    enActualizarNotas
 }) => {
     return (
         <div
             style={{
-                background: exerciseData.completed
+                background: datosEjercicio.completed
                     ? 'linear-gradient(135deg, rgba(0, 255, 136, 0.1) 0%, rgba(0, 212, 255, 0.05) 100%)'
                     : 'rgba(255, 255, 255, 0.05)',
-                border: `2px solid ${exerciseData.completed ? '#00ff88' : 'rgba(255, 255, 255, 0.1)'}`,
+                border: `2px solid ${datosEjercicio.completed ? '#00ff88' : 'rgba(255, 255, 255, 0.1)'}`,
                 borderRadius: '16px',
                 padding: '16px',
                 transition: 'all 0.3s'
@@ -35,28 +35,28 @@ const ExerciseCard = ({
                         fontWeight: '600',
                         marginBottom: '6px'
                     }}>
-                        {exercise?.name}
+                        {ejercicio?.name}
                     </div>
                     <div style={{
                         color: 'rgba(255, 255, 255, 0.6)',
                         fontSize: '13px',
                         marginBottom: '4px'
                     }}>
-                        {exerciseData.sets} series × {exerciseData.reps} reps
+                        {datosEjercicio.sets} series × {datosEjercicio.reps} reps
                     </div>
                     <div style={{
                         color: '#00d4ff',
                         fontSize: '14px',
                         fontWeight: '600'
                     }}>
-                        💪 {exerciseData.weight} kg
+                        💪 {datosEjercicio.weight} kg
                     </div>
                 </div>
 
                 <button
                     onClick={onToggleComplete}
                     style={{
-                        background: exerciseData.completed
+                        background: datosEjercicio.completed
                             ? 'linear-gradient(135deg, #00ff88 0%, #00cc70 100%)'
                             : 'rgba(255, 255, 255, 0.1)',
                         border: 'none',
@@ -71,7 +71,7 @@ const ExerciseCard = ({
                         flexShrink: 0
                     }}
                 >
-                    {exerciseData.completed ? (
+                    {datosEjercicio.completed ? (
                         <Check size={24} style={{ color: '#0a0e27' }} />
                     ) : (
                         <div style={{
@@ -85,12 +85,12 @@ const ExerciseCard = ({
             </div>
 
             {/* Notes Section */}
-            {isEditing ? (
+            {estaEditando ? (
                 <div>
                     <textarea
                         placeholder="Añade tus comentarios..."
-                        value={exerciseData.notes}
-                        onChange={(e) => onUpdateNotes(e.target.value)}
+                        value={datosEjercicio.notes}
+                        onChange={(e) => onActualizarNotas(e.target.value)}
                         style={{
                             width: '100%',
                             background: 'rgba(0, 0, 0, 0.3)',
@@ -105,7 +105,7 @@ const ExerciseCard = ({
                         }}
                     />
                     <button
-                        onClick={onSaveNotes}
+                        onClick={enGuardarNotas}
                         style={{
                             background: '#00d4ff',
                             border: 'none',
@@ -124,7 +124,7 @@ const ExerciseCard = ({
                 </div>
             ) : (
                 <>
-                    {exerciseData.notes ? (
+                    {datosEjercicio.notes ? (
                         <div style={{
                             background: 'rgba(0, 212, 255, 0.1)',
                             borderRadius: '8px',
@@ -142,12 +142,12 @@ const ExerciseCard = ({
                                 color: '#00d4ff',
                                 fontSize: '13px'
                             }}>
-                                {exerciseData.notes}
+                                {datosEjercicio.notes}
                             </div>
                         </div>
                     ) : null}
                     <button
-                        onClick={onEditNotes}
+                        onClick={enEditarNotas}
                         style={{
                             background: 'transparent',
                             border: '1px dashed rgba(255, 255, 255, 0.3)',

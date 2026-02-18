@@ -3,7 +3,7 @@ import { Menu, Activity, Clock, Check } from 'lucide-react';
 import ExerciseCard from './ExerciseCard';
 import { useClientViewModel } from '../../viewmodels/useClientViewModel';
 
-const ClientView = ({
+const VistaCliente = ({
     user,
     routines,
     getExercise,

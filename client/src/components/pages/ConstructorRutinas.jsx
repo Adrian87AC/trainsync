@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { X, Plus, Trash2, Calendar, Dumbbell, Save } from 'lucide-react';
 
-const RoutineBuilder = ({ clients, exercises, onSave, onCancel }) => {
+const ConstructorRutinas = ({ clients, exercises, onSave, onCancel }) => {
     const [name, setName] = useState('');
     const [clientId, setClientId] = useState('');
     const [days, setDays] = useState([{ dayName: '', exercises: [] }]);

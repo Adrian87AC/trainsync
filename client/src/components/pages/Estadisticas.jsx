@@ -1,6 +1,6 @@
 import React from 'react';
 
-const StatCard = ({ icon, label, value, color }) => {
+const Estadisticas = ({ icon, label, value, color }) => {
     return (
         <div style={{
             background: 'rgba(255, 255, 255, 0.05)',
