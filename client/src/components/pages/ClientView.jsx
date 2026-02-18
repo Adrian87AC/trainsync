@@ -1,7 +1,7 @@
 import React from 'react';
 import { Menu, Activity, Clock, Check } from 'lucide-react';
 import ExerciseCard from './ExerciseCard';
-import { useClientViewModel } from '../viewmodels/useClientViewModel';
+import { useClientViewModel } from '../../viewmodels/useClientViewModel';
 
 const ClientView = ({
     user,

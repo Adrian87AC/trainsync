@@ -4,20 +4,18 @@ import StatCard from './StatCard';
 import ClientList from './ClientList';
 import ClientRoutines from './ClientRoutines';
 import RoutineBuilder from './RoutineBuilder';
+import { useTrainerViewModel } from '../../viewmodels/useTrainerViewModel';
 
 const TrainerDashboard = ({
     user,
     data,
-    selectedClient,
-    setSelectedClient,
-    showRoutineBuilder,
-    setShowRoutineBuilder,
     getClientRoutines,
     getExercise,
     onLogout,
     onSaveRoutine
 }) => {
-    const clients = data.users.filter(u => u.role === 'client' && u.trainer_id === user.id);
+    // ViewModel - Manages trainer-specific state and logic
+    const viewModel = useTrainerViewModel(data, user, onSaveRoutine);
 
     return (
         <div style={{ minHeight: '100vh' }}>
@@ -77,7 +75,7 @@ const TrainerDashboard = ({
                     <StatCard
                         icon={<User size={24} />}
                         label="Clientes Activos"
-                        value={clients.length}
+                        value={viewModel.clients.length}
                         color="#00d4ff"
                     />
                     <StatCard
@@ -96,30 +94,30 @@ const TrainerDashboard = ({
 
                 {/* Clients List */}
                 <ClientList
-                    clients={clients}
-                    selectedClient={selectedClient}
-                    setSelectedClient={setSelectedClient}
+                    clients={viewModel.clients}
+                    selectedClient={viewModel.selectedClient}
+                    setSelectedClient={viewModel.setSelectedClient}
                     getClientRoutines={getClientRoutines}
                 />
 
                 {/* Selected Client Routines */}
-                {selectedClient && (
+                {viewModel.selectedClient && (
                     <ClientRoutines
-                        client={selectedClient}
-                        routines={getClientRoutines(selectedClient.id)}
+                        client={viewModel.selectedClient}
+                        routines={getClientRoutines(viewModel.selectedClient.id)}
                         getExercise={getExercise}
-                        setShowRoutineBuilder={setShowRoutineBuilder}
+                        setShowRoutineBuilder={viewModel.setShowRoutineBuilder}
                     />
                 )}
 
                 {/* Routine Builder Modal */}
-                {showRoutineBuilder && (
+                {viewModel.showRoutineBuilder && (
                     <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: 1000 }}>
                         <RoutineBuilder
                             clients={data.users.filter(u => u.role === 'client')}
                             exercises={data.exercises}
-                            onSave={onSaveRoutine}
-                            onCancel={() => setShowRoutineBuilder(false)}
+                            onSave={viewModel.handleCreateRoutine}
+                            onCancel={() => viewModel.setShowRoutineBuilder(false)}
                         />
                     </div>
                 )}
