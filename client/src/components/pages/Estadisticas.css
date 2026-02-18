@@ -1,0 +1,32 @@
+.estadisticas-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 24px;
+    transition: transform 0.2s;
+    cursor: pointer;
+}
+
+.estadisticas-card:hover {
+    transform: translateY(-4px);
+}
+
+.estadisticas-icon {
+    margin-bottom: 12px;
+    opacity: 0.8;
+}
+
+.estadisticas-value {
+    color: white;
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 8px;
+    line-height: 1;
+}
+
+.estadisticas-label {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 13px;
+    font-weight: 500;
+}

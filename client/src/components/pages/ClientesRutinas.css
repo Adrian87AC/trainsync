@@ -1,0 +1,138 @@
+.clientes-rutinas-container {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 24px;
+    margin-top: 20px;
+}
+
+.clientes-rutinas-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.clientes-rutinas-title {
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.new-routine-button {
+    background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.2s;
+}
+
+.new-routine-button:hover {
+    transform: translateY(-2px);
+}
+
+.routines-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.routine-card {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.routine-name {
+    color: #00d4ff;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.routine-day {
+    margin-bottom: 16px;
+}
+
+.routine-day-header {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.routine-day-exercises {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.exercise-item {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.exercise-item-completed {
+    border-left: 3px solid #00ff88;
+}
+
+.exercise-item-incomplete {
+    border-left: 3px solid rgba(255, 255, 255, 0.2);
+}
+
+.exercise-name {
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.exercise-details-text {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+.exercise-notes {
+    color: #00d4ff;
+    font-size: 12px;
+    margin-top: 6px;
+    font-style: italic;
+}
+
+.status-icon-container {
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.status-icon-completed {
+    background: #00ff88;
+}
+
+.status-icon-incomplete {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.status-check-icon {
+    color: #0a0e27;
+}

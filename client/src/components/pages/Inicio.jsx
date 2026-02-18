@@ -1,10 +1,11 @@
 import React from 'react';
-import { Dumbbell, Plus, User, Activity, TrendingUp } from 'lucide-react';
+import { Dumbbell, User, Activity, TrendingUp } from 'lucide-react';
 import StatCard from './Estadisticas';
 import ClientList from './ClientList';
 import ClientRoutines from './ClientRoutines';
 import RoutineBuilder from './RoutineBuilder';
 import { useTrainerViewModel } from '../../viewmodels/useTrainerViewModel';
+import './Inicio.css';
 
 const Inicio = ({
     user,
@@ -15,48 +16,24 @@ const Inicio = ({
     onSaveRoutine
 }) => {
     // ViewModel - Manages trainer-specific state and logic
-    const entrenadorViewModel = useTrainerViewModel(data, user, onSaveRoutine);
+    const viewModel = useTrainerViewModel(data, user, onSaveRoutine);
 
     return (
-        <div style={{ minHeight: '100vh' }}>
+        <div className="inicio-container">
             {/* Header */}
-            <div style={{
-                background: 'rgba(0, 0, 0, 0.3)',
-                backdropFilter: 'blur(10px)',
-                borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-                padding: '20px 32px',
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center'
-            }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-                    <Dumbbell size={28} style={{ color: '#00d4ff' }} />
-                    <h2 style={{
-                        color: 'white',
-                        fontSize: '24px',
-                        fontWeight: '700',
-                        margin: 0
-                    }}>TrainSync Coach</h2>
+            <div className="inicio-header">
+                <div className="inicio-logo-container">
+                    <Dumbbell size={28} className="inicio-logo-icon" />
+                    <h2 className="inicio-title">TrainSync Coach</h2>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-                    <div style={{ textAlign: 'right' }}>
-                        <div style={{ color: 'white', fontSize: '14px', fontWeight: '600' }}>{user.name}</div>
-                        <div style={{ color: 'rgba(255, 255, 255, 0.5)', fontSize: '12px' }}>Entrenador Pro</div>
+                <div className="inicio-user-actions">
+                    <div className="inicio-user-info">
+                        <div className="user-name">{user.name}</div>
+                        <div className="user-role">Entrenador Pro</div>
                     </div>
                     <button
                         onClick={onLogout}
-                        style={{
-                            background: 'rgba(255, 255, 255, 0.1)',
-                            border: '1px solid rgba(255, 255, 255, 0.2)',
-                            borderRadius: '8px',
-                            padding: '8px 16px',
-                            color: 'white',
-                            fontSize: '13px',
-                            cursor: 'pointer',
-                            transition: 'all 0.2s'
-                        }}
-                        onMouseEnter={(e) => e.target.style.background = 'rgba(255, 255, 255, 0.15)'}
-                        onMouseLeave={(e) => e.target.style.background = 'rgba(255, 255, 255, 0.1)'}
+                        className="logout-button"
                     >
                         Salir
                     </button>
@@ -64,14 +41,9 @@ const Inicio = ({
             </div>
 
             {/* Main Content */}
-            <div style={{ padding: '32px', maxWidth: '1400px', margin: '0 auto' }}>
+            <div className="inicio-content">
                 {/* Stats Cards */}
-                <div style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-                    gap: '20px',
-                    marginBottom: '32px'
-                }}>
+                <div className="stats-grid">
                     <StatCard
                         icon={<User size={24} />}
                         label="Clientes Activos"
@@ -93,7 +65,7 @@ const Inicio = ({
                 </div>
 
                 {/* Clients List */}
-                <ClientList
+                <ListaClientes
                     clients={viewModel.clients}
                     selectedClient={viewModel.selectedClient}
                     setSelectedClient={viewModel.setSelectedClient}
@@ -112,7 +84,7 @@ const Inicio = ({
 
                 {/* Routine Builder Modal */}
                 {viewModel.showRoutineBuilder && (
-                    <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: 1000 }}>
+                    <div className="routine-builder-modal-overlay">
                         <RoutineBuilder
                             clients={data.users.filter(u => u.role === 'client')}
                             exercises={data.exercises}
@@ -126,4 +98,4 @@ const Inicio = ({
     );
 };
 
-export default TrainerDashboard;
+export default Inicio;

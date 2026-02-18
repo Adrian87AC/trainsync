@@ -1,0 +1,139 @@
+.carta-ejercicio-container {
+    border-radius: 16px;
+    padding: 16px;
+    transition: all 0.3s;
+}
+
+.carta-ejercicio-completed {
+    background: linear-gradient(135deg, rgba(0, 255, 136, 0.1) 0%, rgba(0, 212, 255, 0.05) 100%);
+    border: 2px solid #00ff88;
+}
+
+.carta-ejercicio-incomplete {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.carta-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+}
+
+.ejercicio-info {
+    flex: 1;
+}
+
+.ejercicio-name {
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.ejercicio-details {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 13px;
+    margin-bottom: 4px;
+}
+
+.ejercicio-weight {
+    color: #00d4ff;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.check-button {
+    border: none;
+    border-radius: 12px;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    flex-shrink: 0;
+}
+
+.check-button-completed {
+    background: linear-gradient(135deg, #00ff88 0%, #00cc70 100%);
+}
+
+.check-button-incomplete {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.check-icon {
+    color: #0a0e27;
+}
+
+.check-placeholder {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 6px;
+}
+
+.notes-editor-textarea {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 10px;
+    color: white;
+    font-size: 13px;
+    font-family: inherit;
+    resize: vertical;
+    min-height: 60px;
+}
+
+.save-notes-button {
+    background: #00d4ff;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    color: #0a0e27;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 8px;
+    width: 100%;
+}
+
+.notes-display {
+    background: rgba(0, 212, 255, 0.1);
+    border-radius: 8px;
+    padding: 10px;
+    margin-top: 8px;
+}
+
+.notes-label {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 11px;
+    margin-bottom: 4px;
+}
+
+.notes-content {
+    color: #00d4ff;
+    font-size: 13px;
+}
+
+.add-notes-button {
+    background: transparent;
+    border: 1px dashed rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    padding: 8px;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 12px;
+    cursor: pointer;
+    margin-top: 8px;
+    width: 100%;
+    transition: all 0.2s;
+}
+
+.add-notes-button:hover {
+    border-color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.7);
+}

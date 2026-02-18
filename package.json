@@ -1,20 +1,15 @@
 {
-    "name": "trainsync",
-    "version": "1.0.0",
-    "description": "Plataforma de Gestión Integral para Entrenadores Personales",
-    "main": "src/App.jsx",
-    "scripts": {
-        "dev": "vite",
-        "build": "vite build",
-        "preview": "vite preview"
-    },
-    "dependencies": {
-        "react": "^18.2.0",
-        "react-dom": "^18.2.0",
-        "lucide-react": "^0.263.1"
-    },
-    "devDependencies": {
-        "@vitejs/plugin-react": "^4.0.0",
-        "vite": "^4.3.9"
-    }
+  "name": "trainsync-root",
+  "version": "1.0.0",
+  "description": "Root package for TrainSync project",
+  "scripts": {
+    "install-all": "npm install && cd client && npm install && cd ../server && npm install",
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "cd server && npm start",
+    "client": "cd client && npm run dev",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  }
 }
