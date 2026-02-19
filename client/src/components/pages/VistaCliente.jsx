@@ -1,7 +1,10 @@
 import React from 'react';
-import { Menu, Activity, Clock, Check } from 'lucide-react';
-import ExerciseCard from './ExerciseCard';
+import { Clock } from 'lucide-react';
+import CartaEjercicio from './CartaEjercicio';
 import { useClientViewModel } from '../../viewmodels/useClientViewModel';
+import { HeaderCliente } from '../header/Header';
+import Footer from '../footer/Footer';
+import './VistaCliente.css';
 
 const VistaCliente = ({
     user,
@@ -15,129 +18,49 @@ const VistaCliente = ({
     const viewModel = useClientViewModel(routines);
 
     return (
-        <div style={{ minHeight: '100vh', paddingBottom: '80px' }}>
-            {/* Mobile Header */}
-            <div style={{
-                background: 'linear-gradient(135deg, #7b2ff7 0%, #b24bf3 100%)',
-                padding: '24px 20px 32px',
-                borderRadius: '0 0 24px 24px',
-                boxShadow: '0 4px 20px rgba(123, 47, 247, 0.3)'
-            }}>
-                <div style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    marginBottom: '20px'
-                }}>
-                    <div>
-                        <div style={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: '13px' }}>
-                            Hola,
-                        </div>
-                        <div style={{
-                            color: 'white',
-                            fontSize: '24px',
-                            fontWeight: '700'
-                        }}>
-                            {user.name.split(' ')[0]} 💪
-                        </div>
-                    </div>
-                    <button
-                        onClick={onLogout}
-                        style={{
-                            background: 'rgba(255, 255, 255, 0.2)',
-                            border: 'none',
-                            borderRadius: '12px',
-                            width: '40px',
-                            height: '40px',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            cursor: 'pointer'
-                        }}
-                    >
-                        <Menu size={20} style={{ color: 'white' }} />
-                    </button>
-                </div>
-
-                <div style={{
-                    background: 'rgba(255, 255, 255, 0.15)',
-                    backdropFilter: 'blur(10px)',
-                    borderRadius: '16px',
-                    padding: '16px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '16px'
-                }}>
-                    <div style={{
-                        background: 'rgba(255, 255, 255, 0.2)',
-                        borderRadius: '12px',
-                        width: '56px',
-                        height: '56px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center'
-                    }}>
-                        <Activity size={28} style={{ color: 'white' }} />
-                    </div>
-                    <div>
-                        <div style={{ color: 'white', fontSize: '28px', fontWeight: '800' }}>
-                            {viewModel.completedToday}
-                        </div>
-                        <div style={{ color: 'rgba(255, 255, 255, 0.9)', fontSize: '13px' }}>
-                            Ejercicios completados hoy
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div className="vista-cliente-container">
+            {/* Header */}
+            <HeaderCliente
+                user={user}
+                completedToday={viewModel.completedToday}
+                onLogout={onLogout}
+            />
 
             {/* Content */}
-            <div style={{ padding: '24px 20px' }}>
-                <h3 style={{
-                    color: 'white',
-                    fontSize: '20px',
-                    fontWeight: '700',
-                    marginBottom: '16px'
-                }}>
+            <div className="vista-cliente-content">
+                <h3 className="content-title">
                     Tu Entrenamiento de Hoy
                 </h3>
 
                 {viewModel.selectedRoutine && viewModel.selectedRoutine.days.map((day, dayIdx) => (
-                    <div key={dayIdx} style={{ marginBottom: '24px' }}>
-                        <div style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '8px',
-                            marginBottom: '12px'
-                        }}>
-                            <Clock size={16} style={{ color: '#00d4ff' }} />
-                            <span style={{
-                                color: '#00d4ff',
-                                fontSize: '14px',
-                                fontWeight: '600'
-                            }}>
+                    <div key={dayIdx} className="day-section">
+                        <div className="day-header">
+                            <Clock size={16} className="clock-icon" />
+                            <span className="day-name">
                                 {day.day_name}
                             </span>
                         </div>
 
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                        <div className="exercises-list">
                             {day.exercises.map((ex, exIdx) => (
-                                <ExerciseCard
+                                <CartaEjercicio
                                     key={exIdx}
-                                    exercise={getExercise(ex.exerciseId)}
-                                    exerciseData={ex}
-                                    isEditing={viewModel.editingNotes === `${dayIdx}-${exIdx}`}
+                                    ejercicio={getExercise(ex.exerciseId)}
+                                    datosEjercicio={ex}
+                                    estaEditando={viewModel.editingNotes === `${dayIdx}-${exIdx}`}
                                     onToggleComplete={() => toggleExerciseCompletion(viewModel.selectedRoutine.id, dayIdx, exIdx)}
-                                    onEditNotes={() => viewModel.setEditingNotes(`${dayIdx}-${exIdx}`)}
-                                    onSaveNotes={() => viewModel.setEditingNotes(null)}
-                                    onUpdateNotes={(notes) => updateExerciseNotes(viewModel.selectedRoutine.id, dayIdx, exIdx, notes)}
+                                    enEditarNotas={() => viewModel.setEditingNotes(`${dayIdx}-${exIdx}`)}
+                                    enGuardarNotas={() => viewModel.setEditingNotes(null)}
+                                    enActualizarNotas={(notes) => updateExerciseNotes(viewModel.selectedRoutine.id, dayIdx, exIdx, notes)}
                                 />
                             ))}
                         </div>
                     </div>
                 ))}
             </div>
+            <Footer />
         </div>
     );
 };
 
-export default ClientView;
+export default VistaCliente;

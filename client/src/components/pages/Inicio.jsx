@@ -1,10 +1,12 @@
 import React from 'react';
-import { Dumbbell, User, Activity, TrendingUp } from 'lucide-react';
+import { User, Activity, TrendingUp } from 'lucide-react';
 import StatCard from './Estadisticas';
 import ClientList from './ClientList';
 import ClientRoutines from './ClientRoutines';
 import RoutineBuilder from './RoutineBuilder';
 import { useTrainerViewModel } from '../../viewmodels/useTrainerViewModel';
+import { HeaderEntrenador } from '../header/Header';
+import Footer from '../footer/Footer';
 import './Inicio.css';
 
 const Inicio = ({
@@ -21,24 +23,7 @@ const Inicio = ({
     return (
         <div className="inicio-container">
             {/* Header */}
-            <div className="inicio-header">
-                <div className="inicio-logo-container">
-                    <Dumbbell size={28} className="inicio-logo-icon" />
-                    <h2 className="inicio-title">TrainSync Coach</h2>
-                </div>
-                <div className="inicio-user-actions">
-                    <div className="inicio-user-info">
-                        <div className="user-name">{user.name}</div>
-                        <div className="user-role">Entrenador Pro</div>
-                    </div>
-                    <button
-                        onClick={onLogout}
-                        className="logout-button"
-                    >
-                        Salir
-                    </button>
-                </div>
-            </div>
+            <HeaderEntrenador user={user} onLogout={onLogout} />
 
             {/* Main Content */}
             <div className="inicio-content">
@@ -94,6 +79,7 @@ const Inicio = ({
                     </div>
                 )}
             </div>
+            <Footer />
         </div>
     );
 };

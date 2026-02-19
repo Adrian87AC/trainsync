@@ -2,69 +2,6 @@
     min-height: 100vh;
 }
 
-.inicio-header {
-    background: rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 20px 32px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.inicio-logo-container {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-}
-
-.inicio-logo-icon {
-    color: #00d4ff;
-}
-
-.inicio-title {
-    color: white;
-    font-size: 24px;
-    font-weight: 700;
-    margin: 0;
-}
-
-.inicio-user-actions {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.inicio-user-info {
-    text-align: right;
-}
-
-.user-name {
-    color: white;
-    font-size: 14px;
-    font-weight: 600;
-}
-
-.user-role {
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 12px;
-}
-
-.logout-button {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 8px;
-    padding: 8px 16px;
-    color: white;
-    font-size: 13px;
-    cursor: pointer;
-    transition: all 0.2s;
-}
-
-.logout-button:hover {
-    background: rgba(255, 255, 255, 0.15);
-}
-
 .inicio-content {
     padding: 32px;
     max-width: 1400px;

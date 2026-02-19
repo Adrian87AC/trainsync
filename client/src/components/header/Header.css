@@ -1,0 +1,144 @@
+/* ===================== */
+/* Header Entrenador     */
+/* ===================== */
+.header-entrenador {
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 20px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-logo-container {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.header-logo-icon {
+    color: #00d4ff;
+}
+
+.header-title {
+    color: white;
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.header-user-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.header-user-info {
+    text-align: right;
+}
+
+.header-user-name {
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.header-user-role {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 12px;
+}
+
+.header-logout-button {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 8px 16px;
+    color: white;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.header-logout-button:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* ===================== */
+/* Header Cliente        */
+/* ===================== */
+.header-cliente {
+    background: linear-gradient(135deg, #7b2ff7 0%, #b24bf3 100%);
+    padding: 24px 20px 32px;
+    border-radius: 0 0 24px 24px;
+    box-shadow: 0 4px 20px rgba(123, 47, 247, 0.3);
+}
+
+.header-cliente-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header-greeting-text {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 13px;
+}
+
+.header-user-name-display {
+    color: white;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.header-menu-button {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 12px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.header-menu-icon {
+    color: white;
+}
+
+.header-daily-progress-card {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.header-activity-icon-container {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-activity-icon {
+    color: white;
+}
+
+.header-progress-number {
+    color: white;
+    font-size: 28px;
+    font-weight: 800;
+}
+
+.header-progress-label {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 13px;
+}

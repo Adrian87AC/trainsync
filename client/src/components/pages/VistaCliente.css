@@ -1,0 +1,42 @@
+.vista-cliente-container {
+    min-height: 100vh;
+    padding-bottom: 80px;
+}
+
+.vista-cliente-content {
+    padding: 24px 20px;
+}
+
+.content-title {
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+.day-section {
+    margin-bottom: 24px;
+}
+
+.day-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.clock-icon {
+    color: #00d4ff;
+}
+
+.day-name {
+    color: #00d4ff;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.exercises-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
