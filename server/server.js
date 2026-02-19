@@ -8,17 +8,17 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Routes
-const userRoutes = require('./routes/userRoutes');
-const exerciseRoutes = require('./routes/exerciseRoutes');
-const routineRoutes = require('./routes/routineRoutes');
-const externalRoutes = require('./routes/externalRoutes');
+// Rutas
+const rutasUsuario = require('./routes/rutasUsuario');
+const rutasEjercicio = require('./routes/rutasEjercicio');
+const rutasRutina = require('./routes/rutasRutina');
+const rutasExterno = require('./routes/rutasExterno');
 
-// Use Routes
-app.use('/api/users', userRoutes);
-app.use('/api/exercises', exerciseRoutes);
-app.use('/api/routines', routineRoutes);
-app.use('/api/external', externalRoutes);
+// Usar rutas
+app.use('/api/users', rutasUsuario);
+app.use('/api/exercises', rutasEjercicio);
+app.use('/api/routines', rutasRutina);
+app.use('/api/external', rutasExterno);
 
 // Health check route
 app.get('/', (req, res) => {

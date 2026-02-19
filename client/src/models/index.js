@@ -1,4 +1,4 @@
-export class User {
+export class Usuario {
     constructor(data) {
         this.id = data.id;
         this.name = data.name;
@@ -7,12 +7,12 @@ export class User {
         this.trainer_id = data.trainer_id;
     }
 
-    getFirstName() {
+    obtenerNombre() {
         return this.name.split(' ')[0];
     }
 }
 
-export class Exercise {
+export class Ejercicio {
     constructor(data) {
         this.id = data.id;
         this.name = data.name;
@@ -21,7 +21,7 @@ export class Exercise {
     }
 }
 
-export class ExerciseDetail {
+export class DetalleEjercicio {
     constructor(data) {
         this.id = data.id;
         this.exerciseId = data.exerciseId;
@@ -33,23 +33,23 @@ export class ExerciseDetail {
     }
 }
 
-export class Day {
+export class Dia {
     constructor(data) {
         this.day_name = data.day_name;
-        this.exercises = (data.exercises || []).map(ex => new ExerciseDetail(ex));
+        this.exercises = (data.exercises || []).map(ej => new DetalleEjercicio(ej));
     }
 }
 
-export class Routine {
+export class Rutina {
     constructor(data) {
         this.id = data.id;
         this.name = data.name;
         this.client_id = data.client_id;
         this.trainer_id = data.trainer_id;
-        this.days = (data.days || []).map(day => new Day(day));
+        this.days = (data.days || []).map(dia => new Dia(dia));
     }
 
-    getTotalExercises() {
-        return this.days.reduce((sum, day) => sum + day.exercises.length, 0);
+    obtenerTotalEjercicios() {
+        return this.days.reduce((suma, dia) => suma + dia.exercises.length, 0);
     }
 }

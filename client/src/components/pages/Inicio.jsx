@@ -1,9 +1,9 @@
 import React from 'react';
 import { User, Activity, TrendingUp } from 'lucide-react';
 import StatCard from './Estadisticas';
-import ClientList from './ClientList';
-import ClientRoutines from './ClientRoutines';
-import RoutineBuilder from './RoutineBuilder';
+import ListaClientes from './ListaClientes';
+import ClientesRutinas from './ClientesRutinas';
+import ConstructorRutinas from './ConstructorRutinas';
 import { useTrainerViewModel } from '../../viewmodels/useTrainerViewModel';
 import { HeaderEntrenador } from '../header/Header';
 import Footer from '../footer/Footer';
@@ -59,7 +59,7 @@ const Inicio = ({
 
                 {/* Selected Client Routines */}
                 {viewModel.selectedClient && (
-                    <ClientRoutines
+                    <ClientesRutinas
                         client={viewModel.selectedClient}
                         routines={getClientRoutines(viewModel.selectedClient.id)}
                         getExercise={getExercise}
@@ -70,7 +70,7 @@ const Inicio = ({
                 {/* Routine Builder Modal */}
                 {viewModel.showRoutineBuilder && (
                     <div className="routine-builder-modal-overlay">
-                        <RoutineBuilder
+                        <ConstructorRutinas
                             clients={data.users.filter(u => u.role === 'client')}
                             exercises={data.exercises}
                             onSave={viewModel.handleCreateRoutine}

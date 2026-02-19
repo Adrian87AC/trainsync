@@ -1,15 +1,15 @@
 import React from 'react';
-import LoginScreen from './components/LoginScreen';
-import TrainerDashboard from './components/TrainerDashboard';
-import ClientView from './components/ClientView';
-import { useAppViewModel } from './viewmodels/useAppViewModel';
+import PantallaLogin from './components/pages/PantallaLogin';
+import Inicio from './components/pages/Inicio';
+import VistaCliente from './components/pages/VistaCliente';
+import { useModeloApp } from './viewmodels/useModeloApp';
 
 const App = () => {
-    // ViewModel - All business logic and state management
-    const viewModel = useAppViewModel();
+    // Modelo de Vista - Toda la lógica y estado de la aplicación
+    const modeloApp = useModeloApp();
 
-    // Loading state
-    if (viewModel.loading) {
+    // Estado de carga
+    if (modeloApp.cargando) {
         return (
             <div style={{ color: 'white', padding: '20px' }}>
                 Cargando datos...
@@ -17,39 +17,39 @@ const App = () => {
         );
     }
 
-    // View - Pure presentation logic
+    // Vista - Lógica de presentación pura
     return (
         <div style={{
             minHeight: '100vh',
             background: 'linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #2d1b3d 100%)',
             fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif"
         }}>
-            {viewModel.currentView === 'login' && (
-                <LoginScreen
-                    onLogin={viewModel.handleLogin}
-                    users={viewModel.data.users}
+            {modeloApp.vistaActual === 'login' && (
+                <PantallaLogin
+                    onLogin={modeloApp.manejarLogin}
+                    usuarios={modeloApp.datos.users}
                 />
             )}
 
-            {viewModel.currentView === 'trainer' && (
-                <TrainerDashboard
-                    user={viewModel.currentUser}
-                    data={viewModel.data}
-                    getClientRoutines={viewModel.getClientRoutines}
-                    getExercise={viewModel.getExercise}
-                    onLogout={viewModel.handleLogout}
-                    onSaveRoutine={viewModel.createNewRoutine}
+            {modeloApp.vistaActual === 'trainer' && (
+                <Inicio
+                    user={modeloApp.usuarioActual}
+                    data={modeloApp.datos}
+                    getClientRoutines={modeloApp.obtenerRutinasPorCliente}
+                    getExercise={modeloApp.obtenerEjercicio}
+                    onLogout={modeloApp.manejarLogout}
+                    onSaveRoutine={modeloApp.crearNuevaRutina}
                 />
             )}
 
-            {viewModel.currentView === 'client' && (
-                <ClientView
-                    user={viewModel.currentUser}
-                    routines={viewModel.getClientRoutines(viewModel.currentUser.id)}
-                    getExercise={viewModel.getExercise}
-                    toggleExerciseCompletion={viewModel.toggleExerciseCompletion}
-                    updateExerciseNotes={viewModel.updateExerciseNotes}
-                    onLogout={viewModel.handleLogout}
+            {modeloApp.vistaActual === 'client' && (
+                <VistaCliente
+                    user={modeloApp.usuarioActual}
+                    routines={modeloApp.obtenerRutinasPorCliente(modeloApp.usuarioActual.id)}
+                    getExercise={modeloApp.obtenerEjercicio}
+                    toggleExerciseCompletion={modeloApp.alternarCompletadoEjercicio}
+                    updateExerciseNotes={modeloApp.actualizarNotasEjercicio}
+                    onLogout={modeloApp.manejarLogout}
                 />
             )}
         </div>

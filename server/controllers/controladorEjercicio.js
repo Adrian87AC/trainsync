@@ -1,39 +1,39 @@
-const exerciseService = require('../services/exerciseService');
+const servicioEjercicio = require('../services/servicioEjercicio');
 
-const getExercises = async (req, res) => {
+const obtenerEjercicios = async (req, res) => {
     try {
-        const exercises = await exerciseService.getAllExercises();
-        res.json(exercises);
+        const ejercicios = await servicioEjercicio.obtenerTodosEjercicios();
+        res.json(ejercicios);
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
 };
 
-const addExercise = async (req, res) => {
+const agregarEjercicio = async (req, res) => {
     try {
-        const id = await exerciseService.createExercise(req.body);
+        const id = await servicioEjercicio.crearEjercicio(req.body);
         res.json({ success: true, id });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
 };
 
-const updateCompletion = async (req, res) => {
+const actualizarCompletado = async (req, res) => {
     try {
         const { id } = req.params;
         const { completed } = req.body;
-        await exerciseService.updateCompletion(id, completed);
+        await servicioEjercicio.actualizarCompletado(id, completed);
         res.json({ success: true });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
 };
 
-const updateNotes = async (req, res) => {
+const actualizarNotas = async (req, res) => {
     try {
         const { id } = req.params;
         const { notes } = req.body;
-        await exerciseService.updateNotes(id, notes);
+        await servicioEjercicio.actualizarNotas(id, notes);
         res.json({ success: true });
     } catch (err) {
         res.status(500).json({ error: err.message });
@@ -41,8 +41,8 @@ const updateNotes = async (req, res) => {
 };
 
 module.exports = {
-    getExercises,
-    addExercise,
-    updateCompletion,
-    updateNotes
+    obtenerEjercicios,
+    agregarEjercicio,
+    actualizarCompletado,
+    actualizarNotas
 };

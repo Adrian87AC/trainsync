@@ -1,49 +1,49 @@
-const API_URL = 'http://localhost:5000/api';
+const URL_API = 'http://localhost:5000/api';
 
-export const fetchUsers = async () => {
-    const response = await fetch(`${API_URL}/users`);
-    if (!response.ok) throw new Error('Failed to fetch users');
-    return response.json();
+export const obtenerUsuarios = async () => {
+    const respuesta = await fetch(`${URL_API}/users`);
+    if (!respuesta.ok) throw new Error('Error al obtener usuarios');
+    return respuesta.json();
 };
 
-export const fetchExercises = async () => {
-    const response = await fetch(`${API_URL}/exercises`);
-    if (!response.ok) throw new Error('Failed to fetch exercises');
-    return response.json();
+export const obtenerEjercicios = async () => {
+    const respuesta = await fetch(`${URL_API}/exercises`);
+    if (!respuesta.ok) throw new Error('Error al obtener ejercicios');
+    return respuesta.json();
 };
 
-export const fetchRoutines = async () => {
-    const response = await fetch(`${API_URL}/routines`);
-    if (!response.ok) throw new Error('Failed to fetch routines');
-    return response.json();
+export const obtenerRutinas = async () => {
+    const respuesta = await fetch(`${URL_API}/routines`);
+    if (!respuesta.ok) throw new Error('Error al obtener rutinas');
+    return respuesta.json();
 };
 
-export const createRoutine = async (routineData) => {
-    const response = await fetch(`${API_URL}/routines`, {
+export const crearRutina = async (datosRutina) => {
+    const respuesta = await fetch(`${URL_API}/routines`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(routineData)
+        body: JSON.stringify(datosRutina)
     });
-    if (!response.ok) throw new Error('Failed to create routine');
-    return response.json();
+    if (!respuesta.ok) throw new Error('Error al crear rutina');
+    return respuesta.json();
 };
 
-export const updateCompletion = async (id, completed) => {
-    const response = await fetch(`${API_URL}/completion/${id}`, {
+export const actualizarCompletado = async (id, completado) => {
+    const respuesta = await fetch(`${URL_API}/exercises/completion/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ completed })
+        body: JSON.stringify({ completed: completado })
     });
-    if (!response.ok) throw new Error('Failed to update completion');
-    return response.json();
+    if (!respuesta.ok) throw new Error('Error al actualizar completado');
+    return respuesta.json();
 };
 
-export const updateNotes = async (id, notes) => {
-    const response = await fetch(`${API_URL}/notes/${id}`, {
+export const actualizarNotas = async (id, notas) => {
+    const respuesta = await fetch(`${URL_API}/exercises/notes/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ notes })
+        body: JSON.stringify({ notes: notas })
     });
-    if (!response.ok) throw new Error('Failed to update notes');
-    return response.json();
+    if (!respuesta.ok) throw new Error('Error al actualizar notas');
+    return respuesta.json();
 };

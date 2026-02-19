@@ -1,20 +1,20 @@
 const db = require('../db');
 
-class User {
-    static async findAll() {
+class Usuario {
+    static async obtenerTodos() {
         const [rows] = await db.query('SELECT * FROM users');
         return rows;
     }
 
-    static async findById(id) {
+    static async obtenerPorId(id) {
         const [rows] = await db.query('SELECT * FROM users WHERE id = ?', [id]);
         return rows[0];
     }
 
-    static async findByRole(role) {
-        const [rows] = await db.query('SELECT * FROM users WHERE role = ?', [role]);
+    static async obtenerPorRol(rol) {
+        const [rows] = await db.query('SELECT * FROM users WHERE role = ?', [rol]);
         return rows;
     }
 }
 
-module.exports = User;
+module.exports = Usuario;
