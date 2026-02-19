@@ -26,30 +26,30 @@ const App = () => {
         }}>
             {modeloApp.vistaActual === 'login' && (
                 <PantallaLogin
-                    onLogin={modeloApp.manejarLogin}
+                    alIniciarSesion={modeloApp.manejarLogin}
                     usuarios={modeloApp.datos.users}
                 />
             )}
 
             {modeloApp.vistaActual === 'trainer' && (
                 <Inicio
-                    user={modeloApp.usuarioActual}
-                    data={modeloApp.datos}
-                    getClientRoutines={modeloApp.obtenerRutinasPorCliente}
-                    getExercise={modeloApp.obtenerEjercicio}
-                    onLogout={modeloApp.manejarLogout}
-                    onSaveRoutine={modeloApp.crearNuevaRutina}
+                    usuario={modeloApp.usuarioActual}
+                    datos={modeloApp.datos}
+                    obtenerRutinasPorCliente={modeloApp.obtenerRutinasPorCliente}
+                    obtenerEjercicio={modeloApp.obtenerEjercicio}
+                    alSalir={modeloApp.manejarLogout}
+                    alGuardarRutina={modeloApp.crearNuevaRutina}
                 />
             )}
 
             {modeloApp.vistaActual === 'client' && (
                 <VistaCliente
-                    user={modeloApp.usuarioActual}
-                    routines={modeloApp.obtenerRutinasPorCliente(modeloApp.usuarioActual.id)}
-                    getExercise={modeloApp.obtenerEjercicio}
-                    toggleExerciseCompletion={modeloApp.alternarCompletadoEjercicio}
-                    updateExerciseNotes={modeloApp.actualizarNotasEjercicio}
-                    onLogout={modeloApp.manejarLogout}
+                    usuario={modeloApp.usuarioActual}
+                    rutinas={modeloApp.obtenerRutinasPorCliente(modeloApp.usuarioActual.id)}
+                    obtenerEjercicio={modeloApp.obtenerEjercicio}
+                    alternarCompletadoEjercicio={modeloApp.alternarCompletadoEjercicio}
+                    actualizarNotasEjercicio={modeloApp.actualizarNotasEjercicio}
+                    alSalir={modeloApp.manejarLogout}
                 />
             )}
         </div>

@@ -1,85 +1,85 @@
 import React from 'react';
 import { User, Activity, TrendingUp } from 'lucide-react';
-import StatCard from './Estadisticas';
+import Estadisticas from './Estadisticas';
 import ListaClientes from './ListaClientes';
 import ClientesRutinas from './ClientesRutinas';
 import ConstructorRutinas from './ConstructorRutinas';
-import { useTrainerViewModel } from '../../viewmodels/useTrainerViewModel';
-import { HeaderEntrenador } from '../header/Header';
-import Footer from '../footer/Footer';
+import { useModeloEntrenador } from '../../viewmodels/useModeloEntrenador';
+import { HeaderEntrenador } from '../header/Cabecera';
+import PiePagina from '../footer/PiePagina';
 import './Inicio.css';
 
 const Inicio = ({
-    user,
-    data,
-    getClientRoutines,
-    getExercise,
-    onLogout,
-    onSaveRoutine
+    usuario,
+    datos,
+    obtenerRutinasPorCliente,
+    obtenerEjercicio,
+    alSalir,
+    alGuardarRutina
 }) => {
-    // ViewModel - Manages trainer-specific state and logic
-    const viewModel = useTrainerViewModel(data, user, onSaveRoutine);
+    // Modelo de Vista - Gestiona el estado y lógica del entrenador
+    const modeloVista = useModeloEntrenador(datos, usuario, alGuardarRutina);
 
     return (
         <div className="inicio-container">
             {/* Header */}
-            <HeaderEntrenador user={user} onLogout={onLogout} />
+            <HeaderEntrenador usuario={usuario} alSalir={alSalir} />
 
-            {/* Main Content */}
+            {/* Contenido Principal */}
             <div className="inicio-content">
-                {/* Stats Cards */}
+                {/* Tarjetas de Estadísticas */}
                 <div className="stats-grid">
-                    <StatCard
-                        icon={<User size={24} />}
-                        label="Clientes Activos"
-                        value={viewModel.clients.length}
+                    <Estadisticas
+                        icono={<User size={24} />}
+                        etiqueta="Clientes Activos"
+                        valor={modeloVista.clientes.length}
                         color="#00d4ff"
                     />
-                    <StatCard
-                        icon={<Activity size={24} />}
-                        label="Rutinas Creadas"
-                        value={data.routines.length}
+                    <Estadisticas
+                        icono={<Activity size={24} />}
+                        etiqueta="Rutinas Creadas"
+                        valor={datos.routines.length}
                         color="#7b2ff7"
                     />
-                    <StatCard
-                        icon={<TrendingUp size={24} />}
-                        label="Ejercicios Completados"
-                        value="87%"
+                    <Estadisticas
+                        icono={<TrendingUp size={24} />}
+                        etiqueta="Ejercicios Completados"
+                        valor="87%"
                         color="#00ff88"
                     />
                 </div>
 
-                {/* Clients List */}
+                {/* Lista de Clientes */}
                 <ListaClientes
-                    clients={viewModel.clients}
-                    selectedClient={viewModel.selectedClient}
-                    setSelectedClient={viewModel.setSelectedClient}
-                    getClientRoutines={getClientRoutines}
+                    clientes={modeloVista.clientes}
+                    clienteSeleccionado={modeloVista.clienteSeleccionado}
+                    setClienteSeleccionado={modeloVista.setClienteSeleccionado}
+                    obtenerRutinasPorCliente={obtenerRutinasPorCliente}
                 />
 
-                {/* Selected Client Routines */}
-                {viewModel.selectedClient && (
+                {/* Rutinas del Cliente Seleccionado */}
+                {modeloVista.clienteSeleccionado && (
                     <ClientesRutinas
-                        client={viewModel.selectedClient}
-                        routines={getClientRoutines(viewModel.selectedClient.id)}
-                        getExercise={getExercise}
-                        setShowRoutineBuilder={viewModel.setShowRoutineBuilder}
+                        cliente={modeloVista.clienteSeleccionado}
+                        rutinas={obtenerRutinasPorCliente(modeloVista.clienteSeleccionado.id)}
+                        obtenerEjercicio={obtenerEjercicio}
+                        setMostrarConstructorRutinas={modeloVista.setMostrarConstructorRutinas}
                     />
                 )}
 
-                {/* Routine Builder Modal */}
-                {viewModel.showRoutineBuilder && (
+                {/* Modal Constructor de Rutinas */}
+                {modeloVista.mostrarConstructorRutinas && (
                     <div className="routine-builder-modal-overlay">
                         <ConstructorRutinas
-                            clients={data.users.filter(u => u.role === 'client')}
-                            exercises={data.exercises}
-                            onSave={viewModel.handleCreateRoutine}
-                            onCancel={() => viewModel.setShowRoutineBuilder(false)}
+                            clientes={datos.users.filter(u => u.role === 'client')}
+                            ejercicios={datos.exercises}
+                            alGuardar={modeloVista.manejarCrearRutina}
+                            alCancelar={() => modeloVista.setMostrarConstructorRutinas(false)}
                         />
                     </div>
                 )}
             </div>
-            <Footer />
+            <PiePagina />
         </div>
     );
 };

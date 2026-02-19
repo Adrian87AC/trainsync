@@ -1,9 +1,9 @@
 import React from 'react';
 import { Dumbbell, Menu, Activity } from 'lucide-react';
-import './Header.css';
+import './Cabecera.css';
 
 // Header para la vista del Entrenador (Inicio)
-export const HeaderEntrenador = ({ user, onLogout }) => {
+export const HeaderEntrenador = ({ usuario, alSalir }) => {
     return (
         <div className="header-entrenador">
             <div className="header-logo-container">
@@ -12,10 +12,10 @@ export const HeaderEntrenador = ({ user, onLogout }) => {
             </div>
             <div className="header-user-actions">
                 <div className="header-user-info">
-                    <div className="header-user-name">{user.name}</div>
+                    <div className="header-user-name">{usuario.name}</div>
                     <div className="header-user-role">Entrenador Pro</div>
                 </div>
-                <button onClick={onLogout} className="header-logout-button">
+                <button onClick={alSalir} className="header-logout-button">
                     Salir
                 </button>
             </div>
@@ -24,17 +24,17 @@ export const HeaderEntrenador = ({ user, onLogout }) => {
 };
 
 // Header para la vista del Cliente (VistaCliente)
-export const HeaderCliente = ({ user, completedToday, onLogout }) => {
+export const HeaderCliente = ({ usuario, completadosHoy, alSalir }) => {
     return (
         <div className="header-cliente">
             <div className="header-cliente-top-row">
                 <div>
                     <div className="header-greeting-text">Hola,</div>
                     <div className="header-user-name-display">
-                        {user.name.split(' ')[0]} 💪
+                        {usuario.name.split(' ')[0]} 💪
                     </div>
                 </div>
-                <button onClick={onLogout} className="header-menu-button">
+                <button onClick={alSalir} className="header-menu-button">
                     <Menu size={20} className="header-menu-icon" />
                 </button>
             </div>
@@ -44,7 +44,7 @@ export const HeaderCliente = ({ user, completedToday, onLogout }) => {
                     <Activity size={28} className="header-activity-icon" />
                 </div>
                 <div>
-                    <div className="header-progress-number">{completedToday}</div>
+                    <div className="header-progress-number">{completadosHoy}</div>
                     <div className="header-progress-label">Ejercicios completados hoy</div>
                 </div>
             </div>

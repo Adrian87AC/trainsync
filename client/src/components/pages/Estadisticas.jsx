@@ -1,7 +1,7 @@
 import React from 'react';
 import './Estadisticas.css';
 
-const Estadisticas = ({ icon, label, value, color }) => {
+const Estadisticas = ({ icono, etiqueta, valor, color }) => {
     return (
         <div
             className="estadisticas-card"
@@ -10,13 +10,13 @@ const Estadisticas = ({ icon, label, value, color }) => {
                 className="estadisticas-icon"
                 style={{ color: color }}
             >
-                {icon}
+                {icono}
             </div>
             <div className="estadisticas-value">
-                {value}
+                {valor}
             </div>
             <div className="estadisticas-label">
-                {label}
+                {etiqueta}
             </div>
         </div>
     );

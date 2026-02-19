@@ -1,6 +1,6 @@
 import React from 'react';
 import { Dumbbell } from 'lucide-react';
-import './Footer.css';
+import './PiePagina.css';
 
 const Footer = () => {
     return (

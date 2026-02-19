@@ -26,8 +26,8 @@ export const useModeloApp = () => {
         cargarDatos();
     }, []);
 
-    const manejarLogin = (userId) => {
-        const usuario = datos.users.find(u => u.id === userId);
+    const manejarLogin = (idUsuario) => {
+        const usuario = datos.users.find(u => u.id === idUsuario);
         if (usuario) {
             setUsuarioActual(usuario);
             setVistaActual(usuario.role);

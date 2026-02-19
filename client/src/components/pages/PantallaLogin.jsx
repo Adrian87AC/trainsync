@@ -2,7 +2,7 @@ import React from 'react';
 import { Dumbbell, User } from 'lucide-react';
 import './PantallaLogin.css';
 
-const PantallaLogin = ({ onLogin, usuarios }) => {
+const PantallaLogin = ({ alIniciarSesion, usuarios }) => {
     return (
         <div className="login-container">
             <div className="login-card">
@@ -21,7 +21,7 @@ const PantallaLogin = ({ onLogin, usuarios }) => {
                     {usuarios.map(usuario => (
                         <button
                             key={usuario.id}
-                            onClick={() => onLogin(usuario.id)}
+                            onClick={() => alIniciarSesion(usuario.id)}
                             className={`user-button ${usuario.role === 'trainer' ? 'trainer-gradient' : 'client-gradient'}`}
                         >
                             <User size={20} />

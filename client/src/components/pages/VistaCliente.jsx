@@ -1,64 +1,64 @@
 import React from 'react';
 import { Clock } from 'lucide-react';
 import CartaEjercicio from './CartaEjercicio';
-import { useClientViewModel } from '../../viewmodels/useClientViewModel';
-import { HeaderCliente } from '../header/Header';
-import Footer from '../footer/Footer';
+import { useModeloCliente } from '../../viewmodels/useModeloCliente';
+import { HeaderCliente } from '../header/Cabecera';
+import PiePagina from '../footer/PiePagina';
 import './VistaCliente.css';
 
 const VistaCliente = ({
-    user,
-    routines,
-    getExercise,
-    toggleExerciseCompletion,
-    updateExerciseNotes,
-    onLogout
+    usuario,
+    rutinas,
+    obtenerEjercicio,
+    alternarCompletadoEjercicio,
+    actualizarNotasEjercicio,
+    alSalir
 }) => {
-    // ViewModel - Manages component state and computed values
-    const viewModel = useClientViewModel(routines);
+    // Modelo de Vista - Gestiona el estado y valores calculados del cliente
+    const modeloVista = useModeloCliente(rutinas);
 
     return (
         <div className="vista-cliente-container">
-            {/* Header */}
+            {/* Cabecera */}
             <HeaderCliente
-                user={user}
-                completedToday={viewModel.completedToday}
-                onLogout={onLogout}
+                usuario={usuario}
+                completadosHoy={modeloVista.completadosHoy}
+                alSalir={alSalir}
             />
 
-            {/* Content */}
+            {/* Contenido */}
             <div className="vista-cliente-content">
                 <h3 className="content-title">
                     Tu Entrenamiento de Hoy
                 </h3>
 
-                {viewModel.selectedRoutine && viewModel.selectedRoutine.days.map((day, dayIdx) => (
-                    <div key={dayIdx} className="day-section">
+                {modeloVista.rutinaSeleccionada && modeloVista.rutinaSeleccionada.days.map((dia, indiceDia) => (
+                    <div key={indiceDia} className="day-section">
                         <div className="day-header">
                             <Clock size={16} className="clock-icon" />
                             <span className="day-name">
-                                {day.day_name}
+                                {dia.day_name}
                             </span>
                         </div>
 
                         <div className="exercises-list">
-                            {day.exercises.map((ex, exIdx) => (
+                            {dia.exercises.map((ej, indiceEjercicio) => (
                                 <CartaEjercicio
-                                    key={exIdx}
-                                    ejercicio={getExercise(ex.exerciseId)}
-                                    datosEjercicio={ex}
-                                    estaEditando={viewModel.editingNotes === `${dayIdx}-${exIdx}`}
-                                    onToggleComplete={() => toggleExerciseCompletion(viewModel.selectedRoutine.id, dayIdx, exIdx)}
-                                    enEditarNotas={() => viewModel.setEditingNotes(`${dayIdx}-${exIdx}`)}
-                                    enGuardarNotas={() => viewModel.setEditingNotes(null)}
-                                    enActualizarNotas={(notes) => updateExerciseNotes(viewModel.selectedRoutine.id, dayIdx, exIdx, notes)}
+                                    key={indiceEjercicio}
+                                    ejercicio={obtenerEjercicio(ej.exerciseId)}
+                                    datosEjercicio={ej}
+                                    estaEditando={modeloVista.editandoNotas === `${indiceDia}-${indiceEjercicio}`}
+                                    alAlternarCompletado={() => alternarCompletadoEjercicio(modeloVista.rutinaSeleccionada.id, indiceDia, indiceEjercicio)}
+                                    enEditarNotas={() => modeloVista.setEditandoNotas(`${indiceDia}-${indiceEjercicio}`)}
+                                    enGuardarNotas={() => modeloVista.setEditandoNotas(null)}
+                                    enActualizarNotas={(notas) => actualizarNotasEjercicio(modeloVista.rutinaSeleccionada.id, indiceDia, indiceEjercicio, notas)}
                                 />
                             ))}
                         </div>
                     </div>
                 ))}
             </div>
-            <Footer />
+            <PiePagina />
         </div>
     );
 };

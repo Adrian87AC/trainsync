@@ -6,7 +6,7 @@ const CartaEjercicio = ({
     ejercicio,
     datosEjercicio,
     estaEditando,
-    onToggleComplete,
+    alAlternarCompletado,
     enEditarNotas,
     enGuardarNotas,
     enActualizarNotas
@@ -29,7 +29,7 @@ const CartaEjercicio = ({
                 </div>
 
                 <button
-                    onClick={onToggleComplete}
+                    onClick={alAlternarCompletado}
                     className={`check-button ${datosEjercicio.completed ? 'check-button-completed' : 'check-button-incomplete'}`}
                 >
                     {datosEjercicio.completed ? (
@@ -40,7 +40,7 @@ const CartaEjercicio = ({
                 </button>
             </div>
 
-            {/* Notes Section */}
+            {/* Sección de Notas */}
             {estaEditando ? (
                 <div>
                     <textarea

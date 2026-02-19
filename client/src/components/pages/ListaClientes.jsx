@@ -1,44 +1,44 @@
 import React from 'react';
 import './ListaClientes.css';
 
-const ListaClientes = ({ clients, selectedClient, setSelectedClient, getClientRoutines }) => {
+const ListaClientes = ({ clientes, clienteSeleccionado, setClienteSeleccionado, obtenerRutinasPorCliente }) => {
     return (
         <div className="lista-clientes-container">
             <h3 className="lista-clientes-title">Mis Clientes</h3>
 
             <div className="clientes-flex-list">
-                {clients.map(client => {
-                    const clientRoutines = getClientRoutines(client.id);
-                    const totalExercises = clientRoutines.reduce((sum, r) =>
+                {clientes.map(cliente => {
+                    const rutinasCliente = obtenerRutinasPorCliente(cliente.id);
+                    const totalEjercicios = rutinasCliente.reduce((sum, r) =>
                         sum + r.days.reduce((daySum, d) => daySum + d.exercises.length, 0), 0
                     );
-                    const completedExercises = clientRoutines.reduce((sum, r) =>
+                    const ejerciciosCompletados = rutinasCliente.reduce((sum, r) =>
                         sum + r.days.reduce((daySum, d) =>
                             daySum + d.exercises.filter(e => e.completed).length, 0
                         ), 0
                     );
-                    const progress = totalExercises > 0 ? Math.round((completedExercises / totalExercises) * 100) : 0;
+                    const progreso = totalEjercicios > 0 ? Math.round((ejerciciosCompletados / totalEjercicios) * 100) : 0;
 
-                    const isActive = selectedClient?.id === client.id;
+                    const estaActivo = clienteSeleccionado?.id === cliente.id;
 
                     return (
                         <div
-                            key={client.id}
-                            onClick={() => setSelectedClient(client)}
-                            className={`cliente-item-card ${isActive ? 'cliente-item-active' : 'cliente-item-inactive'}`}
+                            key={cliente.id}
+                            onClick={() => setClienteSeleccionado(cliente)}
+                            className={`cliente-item-card ${estaActivo ? 'cliente-item-active' : 'cliente-item-inactive'}`}
                         >
                             <div>
                                 <div className="cliente-name-text">
-                                    {client.name}
+                                    {cliente.name}
                                 </div>
                                 <div className="cliente-routines-count">
-                                    {clientRoutines.length} rutina{clientRoutines.length !== 1 ? 's' : ''}
+                                    {rutinasCliente.length} rutina{rutinasCliente.length !== 1 ? 's' : ''}
                                 </div>
                             </div>
                             <div className="cliente-progress-container">
                                 <div className="cliente-progress-info">
                                     <div className="cliente-progress-value">
-                                        {progress}%
+                                        {progreso}%
                                     </div>
                                     <div className="cliente-progress-label">
                                         progreso
